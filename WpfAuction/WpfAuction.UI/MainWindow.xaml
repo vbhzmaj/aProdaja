@@ -1,0 +1,82 @@
+﻿<Window x:Class="WpfAuction.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAuction.UI"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="670" Width="580">
+    <Grid>
+
+
+        <StackPanel Orientation="Horizontal">
+            <GroupBox Header="Product Details" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="630" Width="190">
+                <StackPanel>
+                    <Label Content="Product name" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Content="{Binding CurrentProduct.ProductName, ValidatesOnNotifyDataErrors=False}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" FontWeight="Bold"/>
+                    <Label Content="Category" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Content="{Binding CurrentProduct.Category}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" FontWeight="Bold"/>
+                    <Label Content="Product condition" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Content="{Binding CurrentProduct.ProductCondition, ValidatesOnNotifyDataErrors=False}" FontWeight="Bold"/>
+                    <Label Content="{Binding CurrentProduct.PriceLabel}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Content="{Binding CurrentProduct.ProductPrice, ValidatesOnNotifyDataErrors=False}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" FontWeight="Bold"/>
+                    <Label Content="Remaining time" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Content="{Binding CurrentProduct.RemainingTimeS, ValidatesOnNotifyDataErrors=False}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" FontWeight="Bold"/>
+                    <Label Content="{Binding CurrentProduct.WinnerLabel}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Content="{Binding CurrentProduct.AuctionWinner, ValidatesOnNotifyDataErrors=False}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" FontWeight="Bold"/>
+                    <Label Content="Product description" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <TextBox Text ="{Binding CurrentProduct.ProductDescription, ValidatesOnNotifyDataErrors=False}"  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" 
+                             VerticalAlignment="Top" Width="174" FontWeight="Bold" IsReadOnly="True" MaxHeight="200" />
+                    <GroupBox>
+                        <StackPanel Name="AdminButtons">
+                            <Button Name="bttnInsert" Content="    Add new product    " Margin="4, 15,0,0" Click="bttnInsert_Click"/>
+                            <Button Command="{Binding DeleteCommand}" x:Name="bttnDelete" Content="Delete selected product" Margin=" 4,10,0,0" Click="bttnDelete_Click"  />
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Margin="10,7,0,0">
+                <StackPanel Orientation="Vertical" >
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Search for product:" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Height="26" Width="115"/>
+                        <TextBox Name="FilteringBox" Text="{Binding FilteringText, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Right" Height="24"  TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Margin="10,8,1,8"/>
+                    </StackPanel>
+
+                    <ListBox ItemsSource="{Binding ProductListView, ValidatesOnNotifyDataErrors=False}" SelectedItem="{Binding CurrentProduct, ValidatesOnNotifyDataErrors=False}" 
+                        HorizontalAlignment="Center" Height="400"  VerticalAlignment="Center" Width="320" Margin="10,26,0,19" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Path=StatusLabel, ValidatesOnNotifyDataErrors=False}"></Label>
+                                    <Label Content="{Binding Path=ProductName, ValidatesOnNotifyDataErrors=False}"></Label>
+                                    <Label Content="{Binding Path=ProductCondition, ValidatesOnNotifyDataErrors=False}"></Label>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Orientation="Horizontal">
+
+                        <Button Command="{Binding BidCommand}" x:Name="bidBttn"  Content="Bid selected item" HorizontalAlignment="Left" VerticalAlignment="Center" Width="127" Height="20" Margin="90,0,5,0" Click="bidBttn_Click"/>
+                       
+                    </StackPanel>
+                    <Label Margin="0,20,0,0"/>
+                    <Label/>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding LoginLabel}" FontSize="16" FontWeight="DemiBold" FontStyle="Oblique" Foreground="DarkBlue" Width="270"/>
+                        <Button Command="{Binding LoginCommand}" x:Name="loginBttn"  Content="LogIn" HorizontalAlignment="Left" VerticalAlignment="Center" Width="54" Height="20" Margin="0,0,5,10" Click="loginBttn_Click"/>
+                    </StackPanel>
+                    <Label />
+                    <Label/>
+                    
+
+                </StackPanel>
+
+            </GroupBox>
+
+        </StackPanel>
+
+
+    </Grid>
+</Window>

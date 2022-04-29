@@ -1,0 +1,59 @@
+﻿<Window x:Class="WpfAuction.UI.ProductWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAuction.UI"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="ProductWindow" Height="470" Width="310" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <TextBlock DockPanel.Dock="Right" Foreground="Red"
+FontSize="14" FontWeight="Bold"  Margin="5,0,0,0" ToolTip="{Binding ElementName=adornerPlaceholder, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">*</TextBlock>
+                            <AdornedElementPlaceholder Name="adornerPlaceholder"></AdornedElementPlaceholder>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+
+                <StackPanel>
+                    <Label Content="Product ID" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label Content="{Binding CurrentProduct.ProductId}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="190" FontWeight="Bold"/>
+                    <Label Content="Product name" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtBoxName"    Text="{Binding CurrentProduct.ProductName}" VerticalAlignment="Top" Width="174" FontWeight="Bold"/>
+                    <Label Content="Category" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtBoxCategory" Text="{Binding CurrentProduct.Category}" VerticalAlignment="Top" Width="174" FontWeight="Bold"/>
+                    <Label Content="Product condition" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <TextBox x:Name="txtBoxCondition" Text="{Binding CurrentProduct.ProductCondition}" Width="174" FontWeight="Bold"/>
+                    <Label Content="Product price" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtBoxPrice" Text="{Binding CurrentProduct.ProductPrice}" VerticalAlignment="Top" Width="174" FontWeight="Bold"/>
+                </StackPanel>
+
+
+                <StackPanel>
+                    <Button Command="{Binding SaveCommand}" x:Name="BttnSave" Content="Save" Width="75" Margin="20,100,10,10" Click="BttnSave_Click"/>
+                    <Button x:Name="BttnCancel" Content="Cancel" Width="75" Margin="20,40,10,10" Click="BttnCancel_Click" />
+                </StackPanel>
+
+
+            </StackPanel>
+
+            <StackPanel DockPanel.Dock="Bottom" Margin="0, 10,0,0">
+                <Label Content="Product description" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtBoxDescription" Text ="{Binding CurrentProduct.ProductDescription}"  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"  
+                             VerticalAlignment="Top" Width="280" FontWeight="Bold" />
+            </StackPanel>
+        </DockPanel>
+
+    </Grid>
+</Window>
